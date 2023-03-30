@@ -1,9 +1,8 @@
 import './App.css';
 
 function App() {
-  const tot = '';
   return (
-    <div className="App">
+    <div className="text-3xl font-bold underline">
       <h1>City Weather Forecast</h1>
     </div>
   );
