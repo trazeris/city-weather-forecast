@@ -31,7 +31,9 @@ function App() {
 
   return (
     <div className="flex h-screen flex-col">
-      <h1>City Weather Forecast</h1>
+      <h1 className="bg-slate-800 p-3 text-slate-100 md:text-2xl">
+        City Weather Forecast
+      </h1>
       <MapElement cities={cities} currentCityUpdate={setCurrentCity} />
       {currentCity && <ForecastsContainer city={currentCity} />}
     </div>

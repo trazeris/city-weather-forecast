@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
 import { City, Temperature } from '../App';
-import Forecast from './Forecast';
+import Forecast, { SKEL_TEMP } from './Forecast';
 
 interface Props {
   city: City;
 }
 
+const skelTemperatures = [SKEL_TEMP, SKEL_TEMP, SKEL_TEMP];
+
 function ForecastsContainer({ city }: Props) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [temperatures, setTemperatures] = useState<Temperature[]>([]);
+  const [temperatures, setTemperatures] =
+    useState<Temperature[]>(skelTemperatures);
 
   useEffect(() => {
     const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coords.lat}&lon=${city.coords.lng}&units=metric&appid=539a92a71fbb1b6ee46f8afdfc95bb2e`;
     const fetchWeatherData = async () => {
       try {
-        setIsLoading(true);
+        setTemperatures(skelTemperatures);
         const response = await fetch(url);
         const json = await response.json();
         // would be best to have API types or use a client,
@@ -22,7 +24,6 @@ function ForecastsContainer({ city }: Props) {
           .slice(1, 4)
           .map((forecast: { temp: { day: number } }) => forecast.temp.day);
         setTemperatures(responseTemperatures);
-        setIsLoading(false);
       } catch (error) {
         console.log('error', error);
       }
@@ -31,14 +32,17 @@ function ForecastsContainer({ city }: Props) {
   }, [city]);
 
   return (
-    <div className="h-30 absolute bottom-7 right-7 z-[1000] w-auto bg-slate-200">
-      <h3>{city.name}</h3>
-      <ul>
-        {temperatures.length > 0 &&
-          temperatures.map((temp, index) => (
+    <div className="absolute bottom-5 left-0 z-[1000] flex w-full justify-center">
+      <div className="w-screen bg-slate-800 p-7 text-center shadow-xl md:w-auto md:rounded-md md:p-10">
+        <ul className="mb-3 flex justify-between">
+          {temperatures.map((temp, index) => (
             <Forecast key={index} dateIndex={index} temp={temp} />
           ))}
-      </ul>
+        </ul>
+        <h3 className="text-slate-400 md:text-2xl">
+          3-day forecast for {city.name}
+        </h3>
+      </div>
     </div>
   );
 }
