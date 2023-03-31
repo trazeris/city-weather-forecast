@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import type { UserConfig as VitestUserConfigInterface } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import eslintPlugin from 'vite-plugin-eslint';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const vitestConfig: VitestUserConfigInterface = {
   test: {
@@ -14,6 +15,6 @@ const vitestConfig: VitestUserConfigInterface = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslintPlugin()],
+  plugins: [tsconfigPaths(), react(), eslintPlugin()],
   test: vitestConfig.test,
 });
