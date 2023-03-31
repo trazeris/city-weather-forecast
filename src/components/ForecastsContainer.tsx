@@ -32,18 +32,16 @@ function ForecastsContainer({ city }: Props) {
   }, [city]);
 
   return (
-    <div className="absolute bottom-5 left-0 z-[1000] flex w-full justify-center">
-      <div className="w-screen bg-slate-800 p-7 text-center shadow-xl md:w-auto md:rounded-md md:p-10">
-        <ul className="mb-3 flex justify-between">
-          {temperatures.map((temp, index) => (
-            <Forecast key={index} dateIndex={index} temp={temp} />
-          ))}
-        </ul>
-        <h3 className="text-slate-400 md:text-2xl">
-          3-day forecast for {city.name}
-        </h3>
-      </div>
-    </div>
+    <>
+      <ul className="mb-3 flex justify-between">
+        {temperatures.map((temp, index) => (
+          <Forecast key={index} dateIndex={index} temp={temp} />
+        ))}
+      </ul>
+      <h3 className="text-slate-400 md:text-2xl">
+        3-day forecast for {city.name}
+      </h3>
+    </>
   );
 }
 

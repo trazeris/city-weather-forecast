@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import MapElement from './components/MapElement';
 import ForecastsContainer from './components/ForecastsContainer';
+import MapPopup from './components/MapPopup';
 
 export interface City {
   name: string;
@@ -35,7 +36,15 @@ function App() {
         City Weather Forecast
       </h1>
       <MapElement cities={cities} currentCityUpdate={setCurrentCity} />
-      {currentCity && <ForecastsContainer city={currentCity} />}
+      <MapPopup>
+        {currentCity ? (
+          <ForecastsContainer city={currentCity} />
+        ) : (
+          <h3 className="text-slate-400 md:text-2xl">
+            Please click on a city to get forecast
+          </h3>
+        )}
+      </MapPopup>
     </div>
   );
 }
