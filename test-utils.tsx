@@ -2,7 +2,7 @@
 
 import { render } from '@testing-library/react';
 
-const customRender = (ui, options = {}) =>
+const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     // wrap provider(s) here if needed
 
