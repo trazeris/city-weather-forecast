@@ -1,8 +1,8 @@
 import { LatLng } from 'leaflet';
 import { useState } from 'react';
 import './App.css';
-import MapElement from './components/MapElement';
-import ForecastsContainer from './components/ForecastsContainer';
+import MapElement from './components/MapElement/MapElement';
+import ForecastsContainer from './components/ForecastsContainer/ForecastsContainer';
 import MapPopup from './components/MapPopup';
 
 export interface City {

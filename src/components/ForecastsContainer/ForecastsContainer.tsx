@@ -1,6 +1,6 @@
-import { City } from '../App';
-import Forecast, { SKEL_TEMP } from './Forecast';
-import useFetchTemperatures from '../utils/useFetchTemperatures';
+import { City } from '@/src/App';
+import Forecast, { SKEL_TEMP } from '../Forecast/Forecast';
+import useFetchTemperatures from '@/src/utils/useFetchTemperatures';
 
 interface Props {
   city: City;
