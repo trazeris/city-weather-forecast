@@ -22,6 +22,7 @@ describe('MapElement', () => {
       <MapElement
         cities={testCities}
         currentCityUpdate={currentCityUpdateMock}
+        currentCity={null}
       />,
     );
 
@@ -37,6 +38,7 @@ describe('MapElement', () => {
       <MapElement
         cities={testCities}
         currentCityUpdate={currentCityUpdateMock}
+        currentCity={null}
       />,
     );
 
@@ -50,6 +52,7 @@ describe('MapElement', () => {
       <MapElement
         cities={testCities}
         currentCityUpdate={currentCityUpdateMock}
+        currentCity={null}
       />,
     );
 
@@ -66,6 +69,7 @@ describe('MapElement', () => {
       <MapElement
         cities={testCities}
         currentCityUpdate={currentCityUpdateMock}
+        currentCity={null}
       />,
     );
     const firstMarker = screen.getByRole('button', {
@@ -79,5 +83,18 @@ describe('MapElement', () => {
     });
     await user.click(marseilleMarker);
     expect(currentCityUpdateMock).toHaveBeenCalledWith(testCities[1]);
+  });
+
+  it('should have a selected marker if there is a current city', async () => {
+    const currentCityUpdateMock = vi.fn(() => 0);
+    const { container } = render(
+      <MapElement
+        cities={testCities}
+        currentCityUpdate={currentCityUpdateMock}
+        currentCity={testCities[0]}
+      />,
+    );
+    const selectedMarker = container.getElementsByClassName('selected-marker');
+    expect(selectedMarker.length).toEqual(1);
   });
 });

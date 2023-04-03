@@ -1,16 +1,42 @@
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
+import { Icon, Map } from 'leaflet';
+import { useState } from 'react';
 import { City } from '@/src/model';
 
 import './MapElement.css';
-import { Map } from 'leaflet';
-import { useState } from 'react';
+import MapMarkerSVG from '@/src/assets/map_marker.svg';
+import MapMarkerSelectedSVG from '@/src/assets/map_marker.selected.svg';
+
+const cityIcon = new Icon({
+  iconUrl: MapMarkerSVG,
+  iconRetinaUrl: MapMarkerSVG,
+  iconSize: [50, 64],
+  iconAnchor: [22, 54],
+  tooltipAnchor: [17, -32],
+});
+const citySelectedIcon = new Icon({
+  iconUrl: MapMarkerSelectedSVG,
+  iconRetinaUrl: MapMarkerSelectedSVG,
+  iconSize: [50, 64],
+  iconAnchor: [22, 54],
+  tooltipAnchor: [17, -32],
+  className: 'selected-marker',
+});
 
 interface Props {
   cities: City[];
+  currentCity: City | null;
   currentCityUpdate: React.Dispatch<React.SetStateAction<City | null>>;
 }
 
-function MapElement({ cities, currentCityUpdate }: Props) {
+function getCityIcon(targetCity: City, currentCity: City | null): Icon {
+  if (currentCity) {
+    return targetCity === currentCity ? citySelectedIcon : cityIcon;
+  }
+  return cityIcon;
+}
+
+function MapElement({ cities, currentCity, currentCityUpdate }: Props) {
   const [map, setMap] = useState<Map | null>(null);
   const handleMarkerClick = (city: City) => {
     map?.panTo(city.coords);
@@ -31,6 +57,7 @@ function MapElement({ cities, currentCityUpdate }: Props) {
         />
         {cities.map((city) => (
           <Marker
+            icon={getCityIcon(city, currentCity)}
             key={city.name}
             position={city.coords}
             eventHandlers={{ click: () => handleMarkerClick(city) }}

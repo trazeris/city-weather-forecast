@@ -15,7 +15,11 @@ function App() {
       <h1 className="bg-slate-800 p-3 text-slate-100 md:text-2xl">
         City Weather Forecast
       </h1>
-      <MapElement cities={cities} currentCityUpdate={setCurrentCity} />
+      <MapElement
+        cities={cities}
+        currentCity={currentCity}
+        currentCityUpdate={setCurrentCity}
+      />
       <MapPopup>
         {currentCity ? (
           <ForecastsContainer city={currentCity} />
