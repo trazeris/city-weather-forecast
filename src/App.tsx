@@ -1,25 +1,11 @@
-import { LatLng } from 'leaflet';
 import { useState } from 'react';
-import './App.css';
 import MapElement from './components/MapElement/MapElement';
 import ForecastsContainer from './components/ForecastsContainer/ForecastsContainer';
 import MapPopup from './components/MapPopup';
 import { City } from './model';
+import { cities } from './data/cities';
 
-const cities: City[] = [
-  {
-    name: 'Toulouse',
-    coords: new LatLng(43.6047, 1.4442),
-  },
-  {
-    name: 'Marseille',
-    coords: new LatLng(43.2965, 5.3698),
-  },
-  {
-    name: 'Valras-plage',
-    coords: new LatLng(43.2487, 3.2923),
-  },
-];
+import './App.css';
 
 function App() {
   const [currentCity, setCurrentCity] = useState<City | null>(null);
