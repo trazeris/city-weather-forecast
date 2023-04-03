@@ -1,4 +1,4 @@
-import { City } from '@/src/App';
+import { City } from '@/src/model';
 import Forecast, { SKEL_TEMP } from '../Forecast/Forecast';
 import useFetchTemperatures from '@/src/utils/useFetchTemperatures';
 

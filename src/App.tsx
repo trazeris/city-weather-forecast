@@ -4,13 +4,7 @@ import './App.css';
 import MapElement from './components/MapElement/MapElement';
 import ForecastsContainer from './components/ForecastsContainer/ForecastsContainer';
 import MapPopup from './components/MapPopup';
-
-export interface City {
-  name: string;
-  coords: LatLng;
-}
-
-export type Temperature = number;
+import { City } from './model';
 
 const cities: City[] = [
   {

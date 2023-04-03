@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '@/test-utils';
 import ForecastsContainer from './ForecastsContainer';
-import { City } from '../../App';
 import { LatLng } from 'leaflet';
+import { City } from '@/src/model';
 
 const testCity: City = {
   name: 'Cityname',

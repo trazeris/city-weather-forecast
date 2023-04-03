@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Temperature, City } from '../App';
+import { Temperature, City } from '@/src/model';
 
 const useFetchTemperatures = (
   city: City,

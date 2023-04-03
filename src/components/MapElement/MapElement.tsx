@@ -1,5 +1,5 @@
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
-import { City } from '@/src/App';
+import { City } from '@/src/model';
 
 import './MapElement.css';
 import { Map } from 'leaflet';

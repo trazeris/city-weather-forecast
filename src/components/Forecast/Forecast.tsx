@@ -1,4 +1,4 @@
-import { Temperature } from '@/src/App';
+import { Temperature } from '@/src/model';
 
 function getDayName(date: Date) {
   return date.toLocaleDateString('en-US', { weekday: 'long' });
