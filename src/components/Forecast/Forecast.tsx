@@ -1,8 +1,6 @@
 import { Temperature } from '@/src/model';
+import { getDayName } from '@/src/utils/getDayName';
 
-function getDayName(date: Date) {
-  return date.toLocaleDateString('en-US', { weekday: 'long' });
-}
 const now = new Date();
 const in2days = new Date(now.setDate(now.getDate() + 2));
 const in3days = new Date(now.setDate(now.getDate() + 1));
