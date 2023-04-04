@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { render, screen, userEvent } from '@/test-utils';
+import { render, screen, userEvent } from '@/utils/test-utils';
 
 import MapElement from './MapElement';
 import { LatLng } from 'leaflet';

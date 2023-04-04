@@ -23,7 +23,11 @@ function Forecast({ dateIndex, temp }: Props) {
           {Math.round(temp)}°C
         </p>
       ) : (
-        <p className="mt-2 h-6 w-12 animate-pulse bg-slate-500 md:mx-3 md:h-8"></p>
+        <p
+          className="mt-2 h-6 w-12 animate-pulse bg-slate-500 md:mx-3 md:h-8"
+          role="alert"
+          aria-busy="true"
+        ></p>
       )}
     </li>
   );
