@@ -1,4 +1,4 @@
-# CITY WEATHER FORECAST
+# CITY WEATHER FORECAST [![Netlify Status](https://api.netlify.com/api/v1/badges/3edc0c49-16db-40aa-acc0-b3b4689b6c35/deploy-status)](https://app.netlify.com/sites/weathercityforecast/deploys)
 
 A simple application to display city weather forecast.
 
