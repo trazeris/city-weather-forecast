@@ -1,11 +1,11 @@
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import { Icon, Map } from 'leaflet';
 import { useState } from 'react';
-import { City } from '@/src/model';
+import { City } from '@/model';
 
 import './MapElement.css';
-import MapMarkerSVG from '@/src/assets/map_marker.svg';
-import MapMarkerSelectedSVG from '@/src/assets/map_marker.selected.svg';
+import MapMarkerSVG from '@/assets/map_marker.svg';
+import MapMarkerSelectedSVG from '@/assets/map_marker.selected.svg';
 
 const cityIcon = new Icon({
   iconUrl: MapMarkerSVG,

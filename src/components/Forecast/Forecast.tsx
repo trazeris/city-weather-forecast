@@ -1,5 +1,5 @@
-import { Temperature } from '@/src/model';
-import { getDayName } from '@/src/utils/getDayName';
+import { Temperature } from '@/model';
+import { getDayName } from '@/utils/getDayName';
 
 const now = new Date();
 const in2days = new Date(now.setDate(now.getDate() + 2));

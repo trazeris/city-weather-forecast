@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import App from './App';
 
-import { render, screen, userEvent } from '../test-utils';
+import { render, screen, userEvent } from './test-utils';
 import { cities } from './data/cities';
 
 describe('Home test', () => {

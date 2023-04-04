@@ -1,4 +1,4 @@
-import { City } from '@/src/model';
+import { City } from '@/model';
 import { LatLng } from 'leaflet';
 
 export const cities: City[] = [

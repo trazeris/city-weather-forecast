@@ -9,7 +9,7 @@ const vitestConfig: VitestUserConfigInterface = {
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './setup-tests.js',
+    setupFiles: './src/setup-tests.js',
     coverage: {
       provider: 'c8', // or 'c8'
       reporter: ['text', 'html'],
