@@ -1,13 +1,13 @@
 import { City } from '@/model';
-import { get3DayTemperatureForecast } from './owm-client';
 import useSWR from 'swr';
+import { getOneCallForecast } from './owm-client/owm-client';
 
 const useForecast = (city: City) => {
   const { data, error, isLoading } = useSWR(
     [city.coords.lat, city.coords.lng],
-    get3DayTemperatureForecast,
+    getOneCallForecast,
   );
-  return { temperatures: data, error, isLoading };
+  return { forecast: data, error, isLoading };
 };
 
 export default useForecast;

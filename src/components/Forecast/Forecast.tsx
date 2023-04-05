@@ -13,14 +13,16 @@ interface Props {
 }
 
 function Forecast({ dateIndex, city }: Props) {
-  const { temperatures, isLoading } = useForecast(city);
+  const { forecast, isLoading } = useForecast(city);
+  const currentForecast =
+    forecast && forecast.daily ? forecast.daily[dateIndex] : null;
 
   return (
     <li className="block text-center md:px-5">
       <p className="text-lg text-slate-500">{dayNames[dateIndex - 1]}</p>
-      {!isLoading && temperatures ? (
+      {!isLoading && currentForecast ? (
         <p className="text-2xl text-slate-50 md:text-4xl">
-          {Math.round(temperatures[dateIndex])}°C
+          {Math.round(currentForecast.temp.day)}°C
         </p>
       ) : (
         <p
