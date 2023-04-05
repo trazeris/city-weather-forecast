@@ -24,10 +24,12 @@ function Forecast({ dateIndex, temp }: Props) {
         </p>
       ) : (
         <p
-          className="mt-2 h-6 w-12 animate-pulse bg-slate-500 md:mx-3 md:h-8"
+          className="animate-pulse bg-slate-500 text-2xl text-transparent md:text-4xl"
           role="alert"
           aria-busy="true"
-        ></p>
+        >
+          Load
+        </p>
       )}
     </li>
   );
