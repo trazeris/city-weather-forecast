@@ -1,21 +1,19 @@
 import { City } from '@/model';
-import Forecast, { SKEL_TEMP } from '../Forecast/Forecast';
-import useFetchTemperatures from '@/utils/useFetchTemperatures';
+import Forecast from '../Forecast/Forecast';
 
 interface Props {
   city: City;
 }
 
-const skelTemperatures = [SKEL_TEMP, SKEL_TEMP, SKEL_TEMP];
+// we will extract the next 3 daily forecasts
+const forecastsRank = [1, 2, 3];
 
 function ForecastsContainer({ city }: Props) {
-  const { temperatures } = useFetchTemperatures(city, skelTemperatures);
-
   return (
     <>
       <ul className="mb-3 flex justify-between">
-        {temperatures.map((temp, index) => (
-          <Forecast key={index} dateIndex={index} temp={temp} />
+        {forecastsRank.map((rank) => (
+          <Forecast key={rank} dateIndex={rank} city={city} />
         ))}
       </ul>
       <h3 className="text-slate-400 md:text-2xl">

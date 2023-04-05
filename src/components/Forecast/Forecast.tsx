@@ -1,5 +1,6 @@
-import { Temperature } from '@/model';
+import { City } from '@/model';
 import { getDayName } from '@/utils/getDayName';
+import useForecast from '@/utils/useForecast';
 
 const now = new Date();
 const in2days = new Date(now.setDate(now.getDate() + 2));
@@ -8,19 +9,18 @@ const dayNames = ['Tomorrow', getDayName(in2days), getDayName(in3days)];
 
 interface Props {
   dateIndex: number;
-  temp: Temperature;
+  city: City;
 }
 
-// arbitrary temperature to use as skeleton when loading
-export const SKEL_TEMP = 1000;
+function Forecast({ dateIndex, city }: Props) {
+  const { temperatures, isLoading } = useForecast(city);
 
-function Forecast({ dateIndex, temp }: Props) {
   return (
     <li className="block text-center md:px-5">
-      <p className="text-lg text-slate-500">{dayNames[dateIndex]}</p>
-      {temp !== 1000 ? (
+      <p className="text-lg text-slate-500">{dayNames[dateIndex - 1]}</p>
+      {!isLoading && temperatures ? (
         <p className="text-2xl text-slate-50 md:text-4xl">
-          {Math.round(temp)}°C
+          {Math.round(temperatures[dateIndex])}°C
         </p>
       ) : (
         <p
