@@ -39,7 +39,8 @@ function getCityIcon(targetCity: City, currentCity: City | null): Icon {
 function MapElement({ cities, currentCity, currentCityUpdate }: Props) {
   const [map, setMap] = useState<Map | null>(null);
   const handleMarkerClick = (city: City) => {
-    map?.panTo(city.coords);
+    // offset 0.25° on latitude to allow for map popup presence
+    map?.panTo([city.coords.lat - 0.25, city.coords.lng]);
     currentCityUpdate(city);
   };
 
