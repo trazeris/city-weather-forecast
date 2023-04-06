@@ -11,7 +11,7 @@ const forecastsRank = [1, 2, 3];
 function ForecastsContainer({ city }: Props) {
   return (
     <>
-      <ul className="mb-3 flex justify-between">
+      <ul className="mb-3 flex justify-between gap-6">
         {forecastsRank.map((rank) => (
           <Forecast key={rank} dateIndex={rank} city={city} />
         ))}
