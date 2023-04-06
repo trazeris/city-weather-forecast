@@ -94,6 +94,7 @@ describe('MapElement', () => {
         currentCity={testCities[0]}
       />,
     );
+    // eslint-disable-next-line testing-library/no-container
     const selectedMarker = container.getElementsByClassName('selected-marker');
     expect(selectedMarker.length).toEqual(1);
   });

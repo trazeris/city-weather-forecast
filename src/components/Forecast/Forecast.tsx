@@ -1,11 +1,6 @@
 import { City } from '@/model';
-import { getDayName } from '@/utils/getDayName';
+import { getDayFromUnixTimestamp } from '@/utils/dates';
 import useForecast from '@/utils/useForecast';
-
-const now = new Date();
-const in2days = new Date(now.setDate(now.getDate() + 2));
-const in3days = new Date(now.setDate(now.getDate() + 1));
-const dayNames = ['Tomorrow', getDayName(in2days), getDayName(in3days)];
 
 interface Props {
   dateIndex: number;
@@ -19,19 +14,32 @@ function Forecast({ dateIndex, city }: Props) {
 
   return (
     <li className="block text-center md:px-5">
-      <p className="text-lg text-slate-500">{dayNames[dateIndex - 1]}</p>
       {!isLoading && currentForecast ? (
-        <p className="text-2xl text-slate-50 md:text-4xl">
-          {Math.round(currentForecast.temp.day)}°C
-        </p>
+        <>
+          <p className="text-lg text-slate-500">
+            {getDayFromUnixTimestamp(currentForecast.dt)}
+          </p>
+          <p className="text-2xl text-slate-50 md:text-4xl">
+            {Math.round(currentForecast.temp.day)}°C
+          </p>
+        </>
       ) : (
-        <p
-          className="animate-pulse bg-slate-500 text-2xl text-transparent md:text-4xl"
-          role="alert"
-          aria-busy="true"
-        >
-          Load
-        </p>
+        <>
+          <p
+            className="animate-pulse bg-slate-500 text-transparent"
+            role="alert"
+            aria-busy="true"
+          >
+            Loading
+          </p>
+          <p
+            className="animate-pulse bg-slate-500 text-2xl text-transparent md:text-4xl"
+            role="alert"
+            aria-busy="true"
+          >
+            Load
+          </p>
+        </>
       )}
     </li>
   );
