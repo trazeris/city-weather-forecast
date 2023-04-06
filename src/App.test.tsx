@@ -23,7 +23,7 @@ describe('Home test', () => {
       description: cities[0].name,
     });
     await user.click(firstMarker);
-    const helpText = screen.getByText(`3-day forecast for ${cities[0].name}`);
+    const helpText = screen.getByText(`Weather in ${cities[0].name}`);
     expect(helpText).toBeInTheDocument();
   });
 });

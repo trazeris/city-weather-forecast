@@ -13,7 +13,7 @@ describe('ForecastsContainer', () => {
   it('should display the city name', () => {
     render(<ForecastsContainer city={testCity} />);
 
-    const tempText = screen.getByText('3-day forecast for Cityname');
+    const tempText = screen.getByText('Weather in Cityname');
     expect(tempText).toBeInTheDocument();
   });
 });

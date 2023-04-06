@@ -16,9 +16,7 @@ function ForecastsContainer({ city }: Props) {
           <Forecast key={rank} dateIndex={rank} city={city} />
         ))}
       </ul>
-      <h3 className="text-slate-400 md:text-2xl">
-        3-day forecast for {city.name}
-      </h3>
+      <h3 className="text-slate-400 md:text-2xl">Weather in {city.name}</h3>
     </>
   );
 }
