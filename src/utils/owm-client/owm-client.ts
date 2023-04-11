@@ -6,7 +6,7 @@ export async function getOneCallForecast(coords: number[]): Promise<Forecast> {
     lon: coords[1].toString(),
     units: 'metric',
     appid: '539a92a71fbb1b6ee46f8afdfc95bb2e',
-    exclude: 'minutely,hourly,alerts',
+    exclude: 'minutely,alerts',
   });
   const url = `https://api.openweathermap.org/data/2.5/onecall?${queryParams.toString()}`;
 

@@ -40,7 +40,7 @@ function MapElement({ cities, currentCity, currentCityUpdate }: Props) {
   const [map, setMap] = useState<Map | null>(null);
   const handleMarkerClick = (city: City) => {
     // offset 0.25° on latitude to allow for map popup presence
-    map?.panTo([city.coords.lat - 0.25, city.coords.lng]);
+    map?.panTo([city.coords.lat - 0.45, city.coords.lng]);
     currentCityUpdate(city);
   };
 

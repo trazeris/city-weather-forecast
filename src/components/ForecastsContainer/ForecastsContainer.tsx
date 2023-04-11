@@ -11,12 +11,11 @@ const forecastsRank = [1, 2, 3];
 function ForecastsContainer({ city }: Props) {
   return (
     <>
-      <ul className="mb-3 flex justify-between gap-6">
+      <ul className="mb-3 mt-3 flex justify-between gap-6">
         {forecastsRank.map((rank) => (
           <Forecast key={rank} dateIndex={rank} city={city} />
         ))}
       </ul>
-      <h3 className="text-slate-400 md:text-2xl">Weather in {city.name}</h3>
     </>
   );
 }

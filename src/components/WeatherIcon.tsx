@@ -26,6 +26,7 @@ import {
   WiTornado,
 } from 'react-icons/wi';
 import { Condition } from '@/utils/owm-client/types';
+import { useState } from 'react';
 
 const iconsMap: Record<Condition, IconType> = {
   [Condition.ThunderstormRainLight]: WiThunderstorm,
@@ -86,17 +87,31 @@ const iconsMap: Record<Condition, IconType> = {
   [Condition.Clear]: WiDaySunny,
   [Condition.CloudsFew]: WiDaySunnyOvercast,
   [Condition.CloudsScattered]: WiDayCloudy,
-  [Condition.CloudsBroken]: WiCloudy,
+  [Condition.CloudsBroken]: WiDayCloudy,
   [Condition.CloudsOvercast]: WiCloudy,
 };
 
 interface Props extends IconBaseProps {
   condition: Condition;
+  description?: string;
 }
 
-function WeatherIcon({ condition, ...other }: Props) {
+function WeatherIcon({ condition, description, ...other }: Props) {
+  const [hovering, setHovering] = useState(false);
   const Component = iconsMap[condition] ?? WiNa;
-  return <Component {...other} />;
+  const showDescription = () => {
+    return hovering && description !== undefined ? true : false;
+  };
+  function toggleDesc() {
+    setHovering((last) => !last);
+  }
+
+  return (
+    <button onClick={toggleDesc}>
+      {showDescription() && <div className="py-3 text-lg">{description}</div>}
+      {!showDescription() && <Component {...other} />}
+    </button>
+  );
 }
 
 export default WeatherIcon;
