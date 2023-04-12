@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import MapElement from './components/MapElement/MapElement';
-import MapPopup from './components/MapPopup';
+import MapPopup from './components/MapPopup/MapPopup';
 import { City } from './model';
 import { cities } from './data/cities';
 
