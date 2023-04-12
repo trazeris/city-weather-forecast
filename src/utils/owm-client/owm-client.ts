@@ -11,5 +11,9 @@ export async function getOneCallForecast(coords: number[]): Promise<Forecast> {
   const url = `https://api.openweathermap.org/data/2.5/onecall?${queryParams.toString()}`;
 
   const response = await fetch(url);
+  if (!response.ok) {
+    const error = new Error('An error occurred while fetching weather');
+    throw error;
+  }
   return response.json();
 }
