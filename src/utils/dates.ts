@@ -12,11 +12,3 @@ export function getDayTimeFromUnixTimestamp(ts: number) {
     minute: 'numeric',
   });
 }
-
-export function getTimeFromUnixTimestamp(ts: number) {
-  const date = new Date(ts * 1000);
-  return date.toLocaleTimeString('en-UK', {
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-}

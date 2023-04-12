@@ -13,7 +13,6 @@ import {
   WiFog,
   WiHail,
   WiLightning,
-  WiNa,
   WiRain,
   WiRainMix,
   WiSandstorm,
@@ -26,7 +25,7 @@ import {
   WiTornado,
 } from 'react-icons/wi';
 import { Condition } from '@/utils/owm-client/types';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 const iconsMap: Record<Condition, IconType> = {
   [Condition.ThunderstormRainLight]: WiThunderstorm,
@@ -96,20 +95,40 @@ interface Props extends IconBaseProps {
   description?: string;
 }
 
-function WeatherIcon({ condition, description, ...other }: Props) {
-  const [hovering, setHovering] = useState(false);
-  const Component = iconsMap[condition] ?? WiNa;
+function WeatherIcon({ condition, className, description, ...other }: Props) {
+  const [clicked, setClicked] = useState(false);
+  const weatherHintId = useId();
+  const Component = iconsMap[condition];
+  const hasDescription = description !== undefined;
   const showDescription = () => {
-    return hovering && description !== undefined ? true : false;
+    return clicked && hasDescription ? true : false;
   };
   function toggleDesc() {
-    setHovering((last) => !last);
+    setClicked((last) => !last);
   }
 
   return (
-    <button onClick={toggleDesc}>
-      {showDescription() && <div className="py-3 text-lg">{description}</div>}
-      {!showDescription() && <Component {...other} />}
+    <button
+      disabled={!hasDescription}
+      className={`relative ${className}`}
+      onMouseEnter={toggleDesc}
+      onMouseLeave={toggleDesc}
+    >
+      {hasDescription && (
+        <span
+          id={`weatherdesc_${condition}_${weatherHintId}`}
+          className={`${
+            !showDescription() && 'hidden'
+          } absolute left-0 top-0 block bg-slate-800/70 text-left text-base`}
+        >
+          {description}
+        </span>
+      )}
+      <Component
+        aria-labelledby={`weatherdesc_${condition}_${weatherHintId}`}
+        {...other}
+        className={`${className} ${showDescription() && 'opacity-30'}`}
+      />
     </button>
   );
 }
