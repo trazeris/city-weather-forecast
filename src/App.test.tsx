@@ -23,7 +23,8 @@ describe('Home test', () => {
       description: cities[0].name,
     });
     await user.click(firstMarker);
-    const helpText = screen.getByText(`3-day forecast for ${cities[0].name}`);
-    expect(helpText).toBeInTheDocument();
+    const cityName = screen.getByTitle('Selected city');
+    expect(cityName).toBeInTheDocument();
+    expect(cityName.textContent).toEqual(cities[0].name);
   });
 });

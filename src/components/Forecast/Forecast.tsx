@@ -1,11 +1,9 @@
 import { City } from '@/model';
-import { getDayName } from '@/utils/getDayName';
+import { getDayFromUnixTimestamp } from '@/utils/dates';
 import useForecast from '@/utils/useForecast';
-
-const now = new Date();
-const in2days = new Date(now.setDate(now.getDate() + 2));
-const in3days = new Date(now.setDate(now.getDate() + 1));
-const dayNames = ['Tomorrow', getDayName(in2days), getDayName(in3days)];
+import WeatherIcon from '../WeatherIcon/WeatherIcon';
+import { formatCelcius } from '@/utils/temperatures';
+import ForecastSkeleton from './Forecast.skel';
 
 interface Props {
   dateIndex: number;
@@ -13,24 +11,29 @@ interface Props {
 }
 
 function Forecast({ dateIndex, city }: Props) {
-  const { temperatures, isLoading } = useForecast(city);
+  const { forecast, isLoading } = useForecast(city);
+  const currentForecast =
+    forecast && forecast.daily ? forecast.daily[dateIndex] : null;
+  if (isLoading || !currentForecast) return <ForecastSkeleton />;
 
   return (
-    <li className="block text-center md:px-5">
-      <p className="text-lg text-slate-500">{dayNames[dateIndex - 1]}</p>
-      {!isLoading && temperatures ? (
-        <p className="text-2xl text-slate-50 md:text-4xl">
-          {Math.round(temperatures[dateIndex])}°C
+    <li className="flex flex-col items-center text-center md:px-5">
+      <p className="mb-2 text-sm text-slate-500 md:text-lg">
+        {getDayFromUnixTimestamp(currentForecast.dt)}
+      </p>
+      <WeatherIcon
+        description={currentForecast.weather[0].description}
+        condition={currentForecast.weather[0].id}
+        className="h-14 w-14 text-slate-50"
+      />
+      <section className="flex flex-row items-center gap-2 text-xl md:text-2xl">
+        <p className="text-slate-200">
+          {formatCelcius(currentForecast.temp.max)}
         </p>
-      ) : (
-        <p
-          className="animate-pulse bg-slate-500 text-2xl text-transparent md:text-4xl"
-          role="alert"
-          aria-busy="true"
-        >
-          Load
+        <p className="text-slate-500">
+          {formatCelcius(currentForecast.temp.min)}
         </p>
-      )}
+      </section>
     </li>
   );
 }
