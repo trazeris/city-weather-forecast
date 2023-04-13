@@ -1,11 +1,12 @@
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import { Icon, Map } from 'leaflet';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { City } from '@/model';
 
 import './MapElement.css';
 import MapMarkerSVG from '@/assets/map_marker.svg';
 import MapMarkerSelectedSVG from '@/assets/map_marker.selected.svg';
+import { SelectedCityContext } from '@/contexts/SelectedCity.context';
 
 const cityIcon = new Icon({
   iconUrl: MapMarkerSVG,
@@ -25,8 +26,6 @@ const citySelectedIcon = new Icon({
 
 interface Props {
   cities: City[];
-  currentCity: City | null;
-  currentCityUpdate: React.Dispatch<React.SetStateAction<City | null>>;
 }
 
 function getCityIcon(targetCity: City, currentCity: City | null): Icon {
@@ -36,12 +35,13 @@ function getCityIcon(targetCity: City, currentCity: City | null): Icon {
   return cityIcon;
 }
 
-function MapElement({ cities, currentCity, currentCityUpdate }: Props) {
+function MapElement({ cities }: Props) {
+  const { currentCity, setCurrentCity } = useContext(SelectedCityContext);
   const [map, setMap] = useState<Map | null>(null);
   const handleMarkerClick = (city: City) => {
     // offset 0.25° on latitude to allow for map popup presence
     map?.panTo([city.coords.lat - 0.45, city.coords.lng]);
-    currentCityUpdate(city);
+    setCurrentCity(city);
   };
 
   return (
