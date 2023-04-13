@@ -1,14 +1,10 @@
-import { LatLng } from 'leaflet';
 import MapPopup from './MapPopup';
-import { render, screen, waitForElementToBeRemoved } from '@/utils/test-utils';
-import { City } from '@/model';
-import { server } from '@/mocks/server';
 import { rest } from 'msw';
+import { render, screen, waitForElementToBeRemoved } from '@/utils/test-utils';
+import { server } from '@/mocks/server';
+import { mockContextWithCity } from '@/mocks/cities';
+import { SelectedCityContext } from '@/contexts/SelectedCity.context';
 
-const testCity: City = {
-  name: 'Cityname',
-  coords: new LatLng(43.6047, 1.4442),
-};
 describe('MapPopup', () => {
   it('should display an error on request error', async () => {
     server.use(
@@ -20,7 +16,11 @@ describe('MapPopup', () => {
       ),
     );
 
-    render(<MapPopup city={testCity} />);
+    render(
+      <SelectedCityContext.Provider value={mockContextWithCity}>
+        <MapPopup />
+      </SelectedCityContext.Provider>,
+    );
 
     await waitForElementToBeRemoved(() => screen.queryAllByRole('alert'));
     const errorText = screen.getByText(
