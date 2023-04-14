@@ -11,13 +11,13 @@ export const SelectedCityContext = createContext<ISelectedCityContext>({
   setCurrentCity: () => null,
 });
 
-interface SelectedCityContextProvider {
+interface SelectedCityContextProviderProps {
   children: ReactNode;
 }
 
 export function SelectedCityContextProvider({
   children,
-}: SelectedCityContextProvider) {
+}: SelectedCityContextProviderProps) {
   const [currentCity, setCurrentCity] = useState<City | null>(null);
   const value = { currentCity, setCurrentCity };
 
