@@ -23,7 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-export { WeatherIcon } from './weathericon';
 export * from './alerts';
 export { Condition } from './condition';
 export * from './current';
