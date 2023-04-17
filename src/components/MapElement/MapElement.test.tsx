@@ -23,16 +23,15 @@ describe('MapElement', () => {
     marseille = mockFavoriteCitiesContextWithCities.favoriteCities[1];
   });
   it('should display a map with controls', () => {
-    render(
+    const { container } = render(
       <FavoriteCitiesContext.Provider value={mockFavoriteCitiesContext}>
         <MapElement />
       </FavoriteCitiesContext.Provider>,
     );
 
-    // maybe we should use querySelector to check for tiles
-
-    const zoomInBtn = screen.getByLabelText('Zoom in');
-    expect(zoomInBtn).toBeInTheDocument();
+    // eslint-disable-next-line testing-library/no-container
+    const selectedMarker = container.getElementsByClassName('leaflet-tile');
+    expect(selectedMarker.length).toEqual(1);
   });
 
   it('should display 2 markers', () => {

@@ -28,8 +28,8 @@ function LocationFinder() {
   };
 
   return (
-    <div className="absolute left-0 top-3 z-[1000] w-screen bg-slate-800 bg-opacity-95 p-2 text-left shadow-xl hover:bg-opacity-100 md:left-1/2 md:w-auto md:-translate-x-1/2 md:rounded-md md:p-4">
-      <form onSubmit={handleSubmit} className="flex justify-center">
+    <div className="w-full rounded bg-slate-800 bg-opacity-95 p-3 text-left shadow-xl hover:bg-opacity-100 md:max-w-xl md:p-4">
+      <form onSubmit={handleSubmit} className="flex justify-between">
         <input
           type="text"
           value={searchString}

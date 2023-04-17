@@ -54,6 +54,7 @@ function MapElement() {
         zoom={8}
         scrollWheelZoom={false}
         ref={(ref) => setMap(ref)}
+        zoomControl={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
