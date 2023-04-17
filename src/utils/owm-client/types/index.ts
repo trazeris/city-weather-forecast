@@ -32,3 +32,4 @@ export * from './forecast';
 export * from './hourly';
 export * from './minutely';
 export * from './weather';
+export * from './owm-city';

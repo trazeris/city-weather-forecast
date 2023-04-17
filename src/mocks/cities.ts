@@ -10,3 +10,8 @@ export const testCities = [
     coords: new LatLng(43.2965, 5.3698),
   },
 ];
+
+export const testSearchedCity = {
+  name: 'Brest',
+  coords: new LatLng(48.3905283, -4.4860088),
+};

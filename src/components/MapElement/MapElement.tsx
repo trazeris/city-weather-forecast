@@ -1,6 +1,6 @@
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import { Icon, Map } from 'leaflet';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { City } from '@/model';
 
 import './MapElement.css';
@@ -37,10 +37,15 @@ function MapElement() {
   const { currentCity, setCurrentCity } = useContext(SelectedCityContext);
   const [map, setMap] = useState<Map | null>(null);
   const handleMarkerClick = (city: City) => {
-    // offset 0.25° on latitude to allow for map popup presence
-    map?.panTo([city.coords.lat - 0.45, city.coords.lng]);
     setCurrentCity(city);
   };
+  // when current city is updated, pan to its location
+  useEffect(() => {
+    if (currentCity) {
+      // offset 0.25° on latitude to allow for map popup presence
+      map?.panTo([currentCity.coords.lat - 0.45, currentCity.coords.lng]);
+    }
+  }, [currentCity]);
 
   return (
     <div className="flex-grow">
