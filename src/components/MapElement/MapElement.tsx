@@ -1,12 +1,13 @@
 import { MapContainer, Marker, TileLayer, Tooltip } from 'react-leaflet';
 import { Icon, Map } from 'leaflet';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { City } from '@/model';
 
 import './MapElement.css';
 import MapMarkerSVG from '@/assets/map_marker.svg';
 import MapMarkerSelectedSVG from '@/assets/map_marker.selected.svg';
 import { SelectedCityContext } from '@/contexts/SelectedCity.context';
+import { FavoriteCitiesContext } from '@/contexts/FavoriteCities.context';
 
 const cityIcon = new Icon({
   iconUrl: MapMarkerSVG,
@@ -24,10 +25,6 @@ const citySelectedIcon = new Icon({
   className: 'selected-marker',
 });
 
-interface Props {
-  cities: City[];
-}
-
 function getCityIcon(targetCity: City, currentCity: City | null): Icon {
   if (currentCity) {
     return targetCity === currentCity ? citySelectedIcon : cityIcon;
@@ -35,14 +32,20 @@ function getCityIcon(targetCity: City, currentCity: City | null): Icon {
   return cityIcon;
 }
 
-function MapElement({ cities }: Props) {
+function MapElement() {
+  const { favoriteCities } = useContext(FavoriteCitiesContext);
   const { currentCity, setCurrentCity } = useContext(SelectedCityContext);
   const [map, setMap] = useState<Map | null>(null);
   const handleMarkerClick = (city: City) => {
-    // offset 0.25° on latitude to allow for map popup presence
-    map?.panTo([city.coords.lat - 0.45, city.coords.lng]);
     setCurrentCity(city);
   };
+  // when current city is updated, pan to its location
+  useEffect(() => {
+    if (currentCity) {
+      // offset 0.25° on latitude to allow for map popup presence
+      map?.panTo([currentCity.coords.lat - 0.45, currentCity.coords.lng]);
+    }
+  }, [currentCity]);
 
   return (
     <div className="flex-grow">
@@ -56,7 +59,7 @@ function MapElement({ cities }: Props) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {cities.map((city) => (
+        {favoriteCities.map((city) => (
           <Marker
             icon={getCityIcon(city, currentCity)}
             key={city.name}

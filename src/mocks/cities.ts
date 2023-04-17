@@ -1,6 +1,4 @@
-import { ISelectedCityContext } from '@/contexts/SelectedCity.context';
 import { LatLng } from 'leaflet';
-import { vi } from 'vitest';
 
 export const testCities = [
   {
@@ -13,12 +11,7 @@ export const testCities = [
   },
 ];
 
-export const mockContext: ISelectedCityContext = {
-  currentCity: null,
-  setCurrentCity: vi.fn(() => 0),
-};
-
-export const mockContextWithCity: ISelectedCityContext = {
-  currentCity: testCities[0],
-  setCurrentCity: vi.fn(() => 0),
+export const testSearchedCity = {
+  name: 'Brest',
+  coords: new LatLng(48.3905283, -4.4860088),
 };

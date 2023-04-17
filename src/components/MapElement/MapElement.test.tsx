@@ -3,11 +3,31 @@ import { render, screen, userEvent } from '@/utils/test-utils';
 
 import MapElement from './MapElement';
 import { SelectedCityContext } from '@/contexts/SelectedCity.context';
-import { mockContext, mockContextWithCity, testCities } from '@/mocks/cities';
+import { FavoriteCitiesContext } from '@/contexts/FavoriteCities.context';
+import {
+  mockFavoriteCitiesContext,
+  mockFavoriteCitiesContextWithCities,
+} from '@/mocks/favorite-cities.context';
+import {
+  mockSelectedCityContext,
+  mockSelectedCityContextWithCity,
+} from '@/mocks/selected-city.context';
+import { City } from '@/model';
+
+let toulouse: City;
+let marseille: City;
 
 describe('MapElement', () => {
+  beforeAll(async () => {
+    toulouse = mockFavoriteCitiesContextWithCities.favoriteCities[0];
+    marseille = mockFavoriteCitiesContextWithCities.favoriteCities[1];
+  });
   it('should display a map with controls', () => {
-    render(<MapElement cities={testCities} />);
+    render(
+      <FavoriteCitiesContext.Provider value={mockFavoriteCitiesContext}>
+        <MapElement />
+      </FavoriteCitiesContext.Provider>,
+    );
 
     // maybe we should use querySelector to check for tiles
 
@@ -16,17 +36,28 @@ describe('MapElement', () => {
   });
 
   it('should display 2 markers', () => {
-    render(<MapElement cities={testCities} />);
+    render(
+      <FavoriteCitiesContext.Provider
+        value={mockFavoriteCitiesContextWithCities}
+      >
+        <MapElement />
+      </FavoriteCitiesContext.Provider>,
+    );
 
     const markers = screen.getAllByAltText('Marker');
     expect(markers.length).toEqual(2);
   });
 
   it('should have a Marker for first test city', () => {
-    render(<MapElement cities={testCities} />);
-
+    render(
+      <FavoriteCitiesContext.Provider
+        value={mockFavoriteCitiesContextWithCities}
+      >
+        <MapElement />
+      </FavoriteCitiesContext.Provider>,
+    );
     const toulouseMarker = screen.getByRole('button', {
-      description: testCities[0].name,
+      description: toulouse.name,
     });
     expect(toulouseMarker).toBeInTheDocument();
   });
@@ -34,27 +65,39 @@ describe('MapElement', () => {
   it('should call updater on marker click', async () => {
     const user = userEvent.setup();
     render(
-      <SelectedCityContext.Provider value={mockContext}>
-        <MapElement cities={testCities} />
+      <SelectedCityContext.Provider value={mockSelectedCityContext}>
+        <FavoriteCitiesContext.Provider
+          value={mockFavoriteCitiesContextWithCities}
+        >
+          <MapElement />
+        </FavoriteCitiesContext.Provider>
       </SelectedCityContext.Provider>,
     );
     const firstMarker = screen.getByRole('button', {
-      description: testCities[0].name,
+      description: toulouse.name,
     });
     await user.click(firstMarker);
-    expect(mockContext.setCurrentCity).toHaveBeenCalledWith(testCities[0]);
+    expect(mockSelectedCityContext.setCurrentCity).toHaveBeenCalledWith(
+      toulouse,
+    );
 
     const marseilleMarker = screen.getByRole('button', {
-      description: testCities[1].name,
+      description: marseille.name,
     });
     await user.click(marseilleMarker);
-    expect(mockContext.setCurrentCity).toHaveBeenCalledWith(testCities[1]);
+    expect(mockSelectedCityContext.setCurrentCity).toHaveBeenCalledWith(
+      marseille,
+    );
   });
 
   it('should have a selected marker if there is a current city', async () => {
     const { container } = render(
-      <SelectedCityContext.Provider value={mockContextWithCity}>
-        <MapElement cities={testCities} />
+      <SelectedCityContext.Provider value={mockSelectedCityContextWithCity}>
+        <FavoriteCitiesContext.Provider
+          value={mockFavoriteCitiesContextWithCities}
+        >
+          <MapElement />
+        </FavoriteCitiesContext.Provider>
       </SelectedCityContext.Provider>,
     );
     // eslint-disable-next-line testing-library/no-container

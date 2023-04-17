@@ -2,8 +2,8 @@ import MapPopup from './MapPopup';
 import { rest } from 'msw';
 import { render, screen, waitForElementToBeRemoved } from '@/utils/test-utils';
 import { server } from '@/mocks/server';
-import { mockContextWithCity } from '@/mocks/cities';
 import { SelectedCityContext } from '@/contexts/SelectedCity.context';
+import { mockSelectedCityContextWithCity } from '@/mocks/selected-city.context';
 
 describe('MapPopup', () => {
   it('should display an error on request error', async () => {
@@ -17,7 +17,7 @@ describe('MapPopup', () => {
     );
 
     render(
-      <SelectedCityContext.Provider value={mockContextWithCity}>
+      <SelectedCityContext.Provider value={mockSelectedCityContextWithCity}>
         <MapPopup />
       </SelectedCityContext.Provider>,
     );

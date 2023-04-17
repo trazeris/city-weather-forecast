@@ -1254,6 +1254,47 @@ export const entireOneCallResponse = {
   ],
 };
 
+export const entireDirectResponse = [
+  {
+    name: 'Brest',
+    local_names: {
+      el: 'Βρέστη',
+      th: 'แบร็สต์',
+      uk: 'Брест',
+      ur: 'بریسٹ',
+      hi: 'ब्रैस्त',
+      sr: 'Брест',
+      bo: 'བེ་རེ་སི་ཊི',
+      lt: 'Brestas',
+      kn: 'ಬ್ರೆಸ್ಟ್',
+      ja: 'ブレスト',
+      bg: 'Брест',
+      lv: 'Bresta',
+      mr: 'ब्रेस्त',
+      zh: '布雷斯特',
+      ar: 'بريست',
+      fa: 'برست',
+      ru: 'Брест',
+      la: 'Brestia',
+      eo: 'Brest',
+      br: 'Brest',
+      fr: 'Brest',
+      he: 'ברסט',
+      ko: '브레스트',
+      ka: 'ბრესტი',
+      be: 'Брэст',
+      ta: 'பிரெஸ்ட்',
+      oc: 'Brèst',
+      kk: 'Брест',
+      mk: 'Брест',
+    },
+    lat: 48.3905283,
+    lon: -4.4860088,
+    country: 'FR',
+    state: 'Brittany',
+  },
+];
+
 // Define handlers that catch the corresponding requests and returns the mock data.
 export const handlers = [
   rest.get(
@@ -1262,4 +1303,7 @@ export const handlers = [
       return res(ctx.status(200), ctx.json(entireOneCallResponse));
     },
   ),
+  rest.get('https://api.openweathermap.org/geo/1.0/direct', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(entireDirectResponse));
+  }),
 ];
