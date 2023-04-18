@@ -4,10 +4,10 @@ import { IFavoriteCitiesContext } from '@/contexts/FavoriteCities.context';
 
 export const mockFavoriteCitiesContext: IFavoriteCitiesContext = {
   favoriteCities: [],
-  addCityToFavorites: vi.fn(() => 0),
+  addCityToFavorites: vi.fn((city) => city),
 };
 
 export const mockFavoriteCitiesContextWithCities: IFavoriteCitiesContext = {
   favoriteCities: testCities,
-  addCityToFavorites: vi.fn(() => 0),
+  addCityToFavorites: vi.fn((city) => city),
 };
