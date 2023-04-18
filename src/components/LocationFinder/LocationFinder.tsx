@@ -55,6 +55,8 @@ function LocationFinder() {
             />
           ) : (
             <CgSpinnerTwoAlt
+              role="alert"
+              aria-busy="true"
               className="animate-spin text-2xl text-white"
               title="Click to search location"
             />
