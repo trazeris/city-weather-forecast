@@ -27,9 +27,7 @@ function MapPopup() {
           <ForecastsContainer city={currentCity} />
         </ForecastErrorBoundary>
       ) : (
-        <h3 className="text-slate-400 md:text-2xl">
-          Please click on a city to get forecast
-        </h3>
+        <h3 className="text-slate-400 md:text-2xl">Please select a city</h3>
       )}
     </div>
   );
