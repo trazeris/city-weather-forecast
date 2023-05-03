@@ -9,9 +9,7 @@ import { testSearchedCity } from './mocks/cities';
 describe('Home test', () => {
   it('the title is visible', () => {
     render(<App />);
-    const helpText = screen.getByText(
-      /Please click on a city to get forecast/i,
-    );
+    const helpText = screen.getByText(/Please select a city/i);
     expect(helpText).toBeInTheDocument();
   });
 

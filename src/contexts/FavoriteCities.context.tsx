@@ -28,7 +28,6 @@ export function FavoriteCitiesContextProvider({
         val.coords.lng === city.coords.lng,
     );
   const addCityToFavorites = (newCity: City): City => {
-    console.log(newCity.coords, favoriteCities);
     const favCity = cityInFavorite(newCity);
     if (!favCity) {
       setFavoriteCities((prevCities) => [...prevCities, newCity]);
